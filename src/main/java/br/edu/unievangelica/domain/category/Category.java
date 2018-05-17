@@ -1,5 +1,8 @@
 package br.edu.unievangelica.domain.category;
 
+import br.edu.unievangelica.domain.produto.Produto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -7,11 +10,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table (name = "category")
+@JsonIgnoreProperties ("produto")
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -27,5 +32,7 @@ public class Category implements Serializable {
     @Column(name = "nome")
     private String nome;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Produto> produto;
 
 }

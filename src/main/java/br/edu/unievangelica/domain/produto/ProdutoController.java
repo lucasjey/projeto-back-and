@@ -19,7 +19,6 @@ public class ProdutoController extends ResponseAbstractController {
         return jsonResponse(produtoService.findAll());
     }
 
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findOne(@PathVariable long id) {
         return jsonResponse(produtoService.findOne(id));
